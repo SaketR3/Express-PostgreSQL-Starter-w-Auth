@@ -1,5 +1,40 @@
+
 GET http://localhost:3001/api
 
 ###
 
-GET http://localhost:3001/products
+GET http://localhost:3001/error
+
+###
+
+GET http://localhost:3001/notes
+
+###
+
+GET http://localhost:3001/notes/2
+
+###
+
+POST http://localhost:3001/notes
+Content-Type: application/json
+
+{
+  "content": "Walk the dog",
+  "important": true,
+  "date": "2024-12-28T09:00:00.000Z"
+}
+
+###
+
+PUT http://localhost:3001/notes/6
+Content-Type: application/json
+
+{
+  "content": "Watch the new episode of The Mandalorian",
+  "important": true,
+  "date": "2024-12-28T09:00:00.000Z"
+}
+
+###
+
+DELETE http://localhost:3001/notes/6
