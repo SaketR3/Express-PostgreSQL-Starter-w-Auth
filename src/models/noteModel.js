@@ -1,13 +1,15 @@
 import db from '../../prisma/client.js';
 
 const noteQueries = {
-  getAllNotes: async () => {
-    return await db.note.findMany();
+  getAllNotes: async (userId) => {
+    return await db.note.findMany({
+      where: { userId: userId },
+    });
   },
 
-  getNoteById: async (id) => {
-    return await db.note.findUnique({
-      where: { id: parseInt(id) },
+  getNoteById: async (noteId, userId) => {
+    return await db.note.findFirst({
+      where: { id: parseInt(noteId), userId: userId },
     });
   },
 
@@ -17,16 +19,16 @@ const noteQueries = {
     });
   },
 
-  updateNoteById: async (id, note) => {
-    return await db.note.update({
-      where: { id: parseInt(id) },
+  updateNoteById: async (noteId, userId, note) => {
+    return await db.note.updateMany({
+      where: { id: parseInt(noteId), userId: userId },
       data: note,
     });
   },
 
-  deleteNoteById: async (id) => {
-    return await db.note.delete({
-      where: { id: parseInt(id) },
+  deleteNoteById: async (noteId, userId) => {
+    return await db.note.deleteMany({
+      where: { id: parseInt(noteId), userId: userId },
     });
   }
 };
